@@ -84,6 +84,12 @@ const config = {
             docId: 'planning',
             position: 'left',
           },
+          {
+            type: 'doc',
+            docId: 'comments',
+            position: 'left',
+            label: 'Comments',
+          }
           // {to: '/blog', label: 'Blog', position: 'left'},
           // {
           //   href: 'https://github.com/facebook/docusaurus',

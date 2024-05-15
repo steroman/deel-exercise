@@ -1,6 +1,7 @@
 ---
 id: planning
 title: Planning
+sidebar_position: 1
 ---
 
 # Planning
