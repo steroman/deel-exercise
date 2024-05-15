@@ -126,4 +126,8 @@ Based on these scores, the prioritization order would be:
 
 ## User community
 
-If resources are short and there's too many issues competing with each other in terms of priority, but the company has an active client community, there's also the possibility to let the community prioritize features by upvoting them. This has the benefit of increasing engagement and transparency. Users could even subscribe to issue updates so that they're automatically informed by the system when an issue makes it to the roadmap and is being tackled.
+Developer communities are a great source of ideas for documentation roadmaps and it's the desire of every API company to have an active and engaged dev community.
+
+If resources are short and there's too many issues competing with each other in terms of priority, but the company has an active community, there's also the possibility to let the community prioritize features by upvoting them.
+
+This has the benefit of increasing engagement and transparency. Users could even subscribe to issue updates so that they're automatically informed by the system when an issue makes it to the roadmap and is being tackled.
