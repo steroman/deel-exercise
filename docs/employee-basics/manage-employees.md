@@ -19,7 +19,7 @@ The `employee` endpoint provides a set of API calls that can be used to create, 
 
 Creating an employee is the first step to be able to handle their data. You can create one by making a POST request to the `employee` endpoint. 
 
-```
+```curl
 curl --request POST \
   --url BASE_URL/api/companies/COMPANY_ID/employees \
   --header 'Accept: application/json' \
@@ -73,12 +73,13 @@ curl --request POST \
 
 Where:
 
-- **COMPANY_ID** is the ID of the company that you're creating an employee in. For example, `ad3562fc-b050-4de7-9eb0-1751eefa680c
-`. For more information, see [companies](https://nmbrs.stoplight.io/docs/nmbrs-restapi/5fad7a8461a01-get-company-list).
+- **COMPANY_ID** is the ID of the company that you're creating an employee in. For example, `ad3562fc-b050-4de7-9eb0-1751eefa680c`. For more information, see [companies](https://nmbrs.stoplight.io/docs/nmbrs-restapi/5fad7a8461a01-get-company-list).
 - BEARER_TOKEN is the bearer token generated from the authentication. For example, `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9`.
 - SUBSCRIPTION_KEY is the subscription key that you generated when you subscribed to the product. For example, `69641f4e3906497da60bee40b6751b0a`.
 
+:::tip
 For more information about the content of the `PersonalInfo` object that you can pass in the request body, check the [personal info object documentation](https://nmbrs.stoplight.io/docs/nmbrs-restapi/6a4f20c9f65fd-personal-info-object).
+:::
 
 A successful response will return the newly created employee's ID.
 
@@ -92,7 +93,7 @@ Where `ID-OF-NEWLY-CREATED-EMPLOYEE` is the ID of the newly created employee. Yo
 
 ## Update employee personal info
 
-After creating an employee, you can update their personal information by making a PUT request to the `employee` endpoint. You can pass the ID of the employee you want to update as a URL parameter and the employee data to update in the request body. If you need to retrieve the current information of an employee, use the [Get employee](https://nmbrs.stoplight.io/docs/nmbrs-restapi/eea078fe0d752-get-an-employee) method.
+After creating an employee, you can update their personal information by making a PUT request to the `employee` endpoint. You can pass the ID of the employee you want to update as a URL parameter and the employee data to update in the request body.
 
 ```curl
 curl --request POST \
@@ -114,15 +115,19 @@ Where:
 `. For more information, see [companies](https://nmbrs.stoplight.io/docs/nmbrs-restapi/5fad7a8461a01-get-company-list).
 - **BEARER_TOKEN** is the bearer token generated from the authentication. For example, `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9`.
 - **SUBSCRIPTION_KEY** is the subscription key that you generated when you subscribed to the product. For example, `69641f4e3906497da60bee40b6751b0a`.
-- **DATA** is the optional user information that you can include in the request body, just as in the [employee creation](#create-employee) step. Fore more info, check the [personal info object documentation](https://nmbrs.stoplight.io/docs/nmbrs-restapi/6a4f20c9f65fd-personal-info-object).
+- **DATA** is the optional user information that you can include in the request body, just as in the [employee creation](#create-employee) step. Fore more information, check the [personal info object documentation](https://nmbrs.stoplight.io/docs/nmbrs-restapi/6a4f20c9f65fd-personal-info-object).
 
-A successful response returns the user's personal info ID. This ID is an internal ID that the system uses to make the employee's personal information unique. However, you don't need to reference this ID because you can retrieve the employee's personal information by using the `employeeId` that you get when you [create an employee](#create-employee).
+A successful response returns the user's personal info ID.
 
 ```json
 {
   "personalInfoId": "756bd0de-fc2f-4b7c-b7ba-d3a3f5360a5b"
 }
 ```
+
+:::info
+`personalInfoId` is an internal ID that we use to make the employee's personal information unique. You don't need to reference this ID because you can retrieve the employee's personal information by using the `employeeId` that you get when you [create an employee](#create-employee).
+:::
 
 ## What's next
 
