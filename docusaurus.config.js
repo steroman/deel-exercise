@@ -69,7 +69,7 @@ const config = {
         title: 'Deel exercise',
         logo: {
           alt: 'My Site Logo',
-          src: 'img/logo.svg',
+          src: 'img/deel-logobar-svg.webp',
         },
         items: [
           {
