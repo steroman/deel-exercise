@@ -6,7 +6,7 @@ sidebar_position: 1
 
 By leveraging the Numbrs API, you can have one source of truth for your employee data and build integrations that keep data in sync with your HRIS system.
 
-The `employee` endpoint provides a set of API calls that can be used to create, update, and delete employees and their personal information. It's a key part of the Numbrs API, because many other endpoints that are used to manage employee data like contracts, schedules, and more are tied to this endpoint.
+The API provides a set of employee-related endpoints and API calls that you can use to create, update, and delete employees and their personal information. Employees are a key part of the Numbrs API, because many other endpoints that are used to manage data like contracts, schedules, and more are tied to an employee.
 
 ## Requirements
 
@@ -17,7 +17,7 @@ The `employee` endpoint provides a set of API calls that can be used to create, 
 
 ## Create employee
 
-Creating an employee is the first step to be able to handle their data. You can create one by making a POST request to the `employee` endpoint. 
+Creating an employee is the first step to be able to handle their data. You can create one by making a `POST` request to the [`employees` endpoint](https://nmbrs.stoplight.io/docs/nmbrs-restapi/13c6a8d9c7190-create-employee). To create an employee, you need to pass the company ID in the URL parameter.
 
 ```curl
 curl --request POST \
@@ -73,9 +73,10 @@ curl --request POST \
 
 Where:
 
-- **COMPANY_ID** is the ID of the company that you're creating an employee in. For example, `ad3562fc-b050-4de7-9eb0-1751eefa680c`. For more information, see [companies](https://nmbrs.stoplight.io/docs/nmbrs-restapi/5fad7a8461a01-get-company-list).
-- BEARER_TOKEN is the bearer token generated from the authentication. For example, `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9`.
-- SUBSCRIPTION_KEY is the subscription key that you generated when you subscribed to the product. For example, `69641f4e3906497da60bee40b6751b0a`.
+- **BASE_URL** is the base URL of the Numbrs API. For example, `https://api.nmbrs.com`.
+- **COMPANY_ID** is the unique ID of the company that you're creating an employee in. For example, `ad3562fc-b050-4de7-9eb0-1751eefa680c`. For more information, see [companies](https://nmbrs.stoplight.io/docs/nmbrs-restapi/5fad7a8461a01-get-company-list).
+- **BEARER_TOKEN** is the bearer token generated from the authentication. For example, `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9`.
+- **SUBSCRIPTION_KEY** is the subscription key that you generated when you subscribed to the product. For example, `69641f4e3906497da60bee40b6751b0a`.
 
 :::tip
 For more information about the content of the `PersonalInfo` object that you can pass in the request body, check the [personal info object documentation](https://nmbrs.stoplight.io/docs/nmbrs-restapi/6a4f20c9f65fd-personal-info-object).
@@ -89,30 +90,32 @@ A successful response will return the newly created employee's ID.
 }
 ```
 
-Where `ID-OF-NEWLY-CREATED-EMPLOYEE` is the ID of the newly created employee. You can use this ID to retrieve and update the employee data, and delete the employee.x
+Where `ID-OF-NEWLY-CREATED-EMPLOYEE` is the unique ID of the newly created employee. You can use this ID to retrieve and update the employee data, and delete the employee.
 
 ## Update employee personal info
 
-After creating an employee, you can update their personal information by making a PUT request to the `employee` endpoint. You can pass the ID of the employee you want to update as a URL parameter and the employee data to update in the request body.
+After creating an employee, you can update their personal information by making a `PUT` request to the [`personalInfo` endpoint](https://nmbrs.stoplight.io/docs/nmbrs-restapi/e12e45d11695c-update-employee-personal-info). You can pass the unique ID of the employee you want to update as a URL parameter and the employee information to update in the request body.
+
+:::tip RETRIEVE USER INFO
+If you need to retreieve the employee's personal information before you update it, you can send a `GET` request to the [`employeeId` endpoint](https://nmbrs.stoplight.io/docs/nmbrs-restapi/eea078fe0d752-get-an-employee).
+:::
 
 ```curl
-curl --request POST \
-  --url BASE_URL/api/companies/COMPANY_ID/employees \
+curl --request PUT \
+  --url BASE_URL/api/employees/EMPLOYEE_ID/personalInfo \
   --header 'Accept: application/json' \
   --header 'Authorization: BEARER_TOKEN' \
   --header 'Content-Type: application/json' \
   --header 'X-Subscription-Key: SUBSCRIPTION_KEY' \
   --data '{
-    "PersonalInfo": {
-            DATA
-        }
-    }
+      DATA
+    }'
 ```
 
 Where:
 
-- **COMPANY_ID** is the ID of the company that you're creating an employee in. For example, `ad3562fc-b050-4de7-9eb0-1751eefa680c
-`. For more information, see [companies](https://nmbrs.stoplight.io/docs/nmbrs-restapi/5fad7a8461a01-get-company-list).
+- **BASE_URL** is the base URL of the Numbrs API. For example, `https://api.nmbrs.com`.
+- **EMPLOYEE_ID** is the unique ID of the employee that you want to update. For example, `ad3562fc-b050-4de7-9eb0-1751eefa680c`. This ID is generated when you create the employee, but you can also retrieve it by using the [`employee list` endpoint](https://nmbrs.stoplight.io/docs/nmbrs-restapi/a31578b069764-get-employee-list).
 - **BEARER_TOKEN** is the bearer token generated from the authentication. For example, `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9`.
 - **SUBSCRIPTION_KEY** is the subscription key that you generated when you subscribed to the product. For example, `69641f4e3906497da60bee40b6751b0a`.
 - **DATA** is the optional user information that you can include in the request body, just as in the [employee creation](#create-employee) step. Fore more information, check the [personal info object documentation](https://nmbrs.stoplight.io/docs/nmbrs-restapi/6a4f20c9f65fd-personal-info-object).
